@@ -8,16 +8,20 @@
 import UIKit
 
 class PostViewController: UIViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let post = UITextView(frame: CGRect(x: 30, y: 30, width: 100, height: 100))
-        post.text = "test"
-        post.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        post.backgroundColor = .black
-        post.textColor = .white
-        view.addSubview(post)
-        view.backgroundColor = .gray
+        view.backgroundColor = .orange
+        setupBarButton()
+    }
+    
+    func setupBarButton() {
+        let baritem = UIBarButtonItem(image: UIImage(systemName: "window.casement.closed"), style: .plain, target: self, action: #selector(showModal))
+        self.navigationItem.rightBarButtonItems = [baritem]
+    }
+    @objc
+    func showModal() {
+        let modalVC = InfoViewController()
+        navigationController?.present(modalVC, animated: true)
     }
 }
+

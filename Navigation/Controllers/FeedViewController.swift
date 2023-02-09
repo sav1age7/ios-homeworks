@@ -9,6 +9,7 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
+    let post = Post(title: "New Title")
     override func viewDidLoad() {
         super.viewDidLoad()
         addButton()
@@ -26,7 +27,8 @@ class FeedViewController: UIViewController {
     
     @objc
     func tapOnTouchButton() {
-        let exampleController = PostViewController()
-        navigationController?.pushViewController(exampleController, animated: true)
+        let nextController = PostViewController()
+        nextController.title = post.title
+        navigationController?.pushViewController(nextController, animated: true)
     }
 }
