@@ -14,6 +14,7 @@
 		AF461338298EA37600C5A856 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF461337298EA37600C5A856 /* TabBarController.swift */; };
 		AF46133A298EA4C600C5A856 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF461339298EA4C600C5A856 /* FeedViewController.swift */; };
 		AF46133C298EA54600C5A856 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46133B298EA54600C5A856 /* ProfileViewController.swift */; };
+		AF461344298EC31F00C5A856 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF461343298EC31F00C5A856 /* PostViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		AF461337298EA37600C5A856 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AF461339298EA4C600C5A856 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AF46133B298EA54600C5A856 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		AF461343298EC31F00C5A856 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				AF461337298EA37600C5A856 /* TabBarController.swift */,
 				AF461339298EA4C600C5A856 /* FeedViewController.swift */,
 				AF46133B298EA54600C5A856 /* ProfileViewController.swift */,
+				AF461343298EC31F00C5A856 /* PostViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF461344298EC31F00C5A856 /* PostViewController.swift in Sources */,
 				AF46133A298EA4C600C5A856 /* FeedViewController.swift in Sources */,
 				AF461338298EA37600C5A856 /* TabBarController.swift in Sources */,
 				AF2D26BA298E91DC0052D21A /* AppDelegate.swift in Sources */,
