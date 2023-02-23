@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController {
         self.title = "Profile"
         view.addSubview(headerView)
         setupConstraints()
+        addStatusButtonAction()
     }
       
     override func viewWillLayoutSubviews() {
@@ -42,6 +43,14 @@ class ProfileViewController: UIViewController {
             headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0) ,
             headerView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
         ])
+    }
+    
+    func addStatusButtonAction() {
+        headerView.showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+    
+    @objc func buttonPressed() {
+        print("Text: " + (headerView.statusLabelView.text ?? "<empty>"))
     }
 }
 
