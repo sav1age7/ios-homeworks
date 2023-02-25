@@ -53,15 +53,20 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(photoView)
-        addSubview(nameLabelView)
-        addSubview(statusLabelView)
-        addSubview(showStatusButton)
+        addSubviews()
         setupConstraints()
+        addStatusButtonAction()
     }
   
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addSubviews() {
+        addSubview(photoView)
+        addSubview(nameLabelView)
+        addSubview(statusLabelView)
+        addSubview(showStatusButton)
     }
     
     override func layoutSubviews() {
@@ -92,10 +97,16 @@ class ProfileHeaderView: UIView {
         ])
     }
     
-
-    
     func setupUI() {
         photoView.layer.masksToBounds = true
         photoView.layer.cornerRadius = photoView.frame.width / 2
+    }
+    
+    func addStatusButtonAction() {
+        showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+    
+    @objc func buttonPressed() {
+        print("Text: " + (statusLabelView.text ?? "<empty>"))
     }
 }
