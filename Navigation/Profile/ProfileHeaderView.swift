@@ -51,6 +51,19 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
+    var statusTextField: UITextField = {
+        let textfield = UITextField()
+        textfield.text = "Listening to music"
+        textfield.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        textfield.textColor = .black
+        textfield.backgroundColor = .white
+        textfield.layer.cornerRadius = 12
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = UIColor.black.cgColor
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        return textfield
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -67,6 +80,7 @@ class ProfileHeaderView: UIView {
         addSubview(fullNameLabel)
         addSubview(statusLabel)
         addSubview(setStatusButton)
+        addSubview(statusTextField)
     }
     
     override func layoutSubviews() {
@@ -79,7 +93,7 @@ class ProfileHeaderView: UIView {
         NSLayoutConstraint.activate([
             avatarImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
             avatarImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
             avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1),
             
             fullNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
@@ -92,7 +106,12 @@ class ProfileHeaderView: UIView {
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -54),
+            
+            statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor) ,
+            statusTextField.trailingAnchor.constraint(equalTo: setStatusButton.trailingAnchor) ,
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 6) ,
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
         ])
     }
