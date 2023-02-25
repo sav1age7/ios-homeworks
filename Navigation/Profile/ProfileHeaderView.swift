@@ -61,6 +61,7 @@ class ProfileHeaderView: UIView {
         textfield.layer.borderWidth = 1
         textfield.layer.borderColor = UIColor.black.cgColor
         textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.borderStyle = .roundedRect
         return textfield
     }()
     
@@ -126,6 +127,6 @@ class ProfileHeaderView: UIView {
     }
     
     @objc func buttonPressed() {
-        print("Text: " + (statusLabel.text ?? "<empty>"))
+        statusLabel.text = statusTextField.text?.trimmingCharacters(in: [" "])
     }
 }
