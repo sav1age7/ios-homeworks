@@ -31,16 +31,10 @@ class ProfileViewController: UIViewController {
         let safeArea = self.view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(
-                equalTo: safeArea.leadingAnchor,
-                constant: 0
-            ),
-            headerView.topAnchor.constraint(
-                equalTo: safeArea.topAnchor,
-                constant: 0
-            ),
-            headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 0) ,
-            headerView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 0),
+            headerView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0) ,
+            headerView.heightAnchor.constraint(equalToConstant: 220),
         ])
     }
 }
