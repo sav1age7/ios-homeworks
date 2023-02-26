@@ -40,7 +40,7 @@ class FeedViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(vStack)
         for number in 1...countOfButtons {
-            vStack.addArrangedSubview(addNextButtonToStack(title: "Button \(number)", tag: number))
+            vStack.addArrangedSubview(getNewButton(title: "Button \(number)", tag: number))
         }
     }
     
@@ -53,7 +53,7 @@ class FeedViewController: UIViewController {
         ])
     }
     
-    private func addNextButtonToStack(title: String, tag: Int) -> UIButton {
+    private func getNewButton(title: String, tag: Int) -> UIButton {
         let button = UIButton()
         button.setTitle(title, for: .normal)
         button.tintColor = .white
