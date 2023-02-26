@@ -22,8 +22,6 @@ class FeedViewController: UIViewController {
     
     let countOfButtons = 2
     
-    private(set) var buttons = [UIButton]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
