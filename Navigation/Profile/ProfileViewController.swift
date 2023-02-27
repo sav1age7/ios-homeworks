@@ -39,10 +39,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(someButton)
     }
       
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
     func setupConstraints() {
         let safeArea = self.view.safeAreaLayoutGuide
 
