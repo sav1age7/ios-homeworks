@@ -81,6 +81,7 @@
 				AF7EF0FF2994BEC000650E4B /* Models */,
 				AF2D26C2298E91DD0052D21A /* Assets.xcassets */,
 				AF24377529A1225B0043EE07 /* Profile */,
+				AF6F59BD29AB32AF0006CB98 /* Feed */,
 				AF2D26C4298E91DD0052D21A /* LaunchScreen.storyboard */,
 				AF2D26C7298E91DD0052D21A /* Info.plist */,
 			);
@@ -91,11 +92,18 @@
 			isa = PBXGroup;
 			children = (
 				AF461337298EA37600C5A856 /* TabBarController.swift */,
-				AF461339298EA4C600C5A856 /* FeedViewController.swift */,
 				AF461343298EC31F00C5A856 /* PostViewController.swift */,
 				AF7EF10029955C3D00650E4B /* InfoViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AF6F59BD29AB32AF0006CB98 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				AF461339298EA4C600C5A856 /* FeedViewController.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		AF7EF0FF2994BEC000650E4B /* Models */ = {

@@ -8,7 +8,7 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-    var photoView: UIImageView = {
+    var avatarImageView: UIImageView = {
         let photoView = UIImageView(image: UIImage(named: "photo"))
         photoView.layer.borderWidth = 3
         photoView.layer.borderColor = CGColor(gray: 1, alpha: 1)
@@ -16,7 +16,7 @@ class ProfileHeaderView: UIView {
         return photoView
     }()
     
-    var nameLabelView: UILabel = {
+    var fullNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Hipster Cat"
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -25,7 +25,7 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    var statusLabelView: UILabel = {
+    var statusLabel: UILabel = {
         let label = UILabel()
         label.text = "Waiting for something..."
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -34,9 +34,9 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    var showStatusButton: UIButton = {
+    var setStatusButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .normal)
         button.tintColor = .white
         button.backgroundColor = .blue
         button.layer.cornerRadius = 4
@@ -51,6 +51,20 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
+    var statusTextField: UITextField = {
+        let textfield = UITextField()
+        textfield.text = "Listening to music"
+        textfield.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        textfield.textColor = .black
+        textfield.backgroundColor = .white
+        textfield.layer.cornerRadius = 12
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = UIColor.black.cgColor
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        textfield.borderStyle = .roundedRect
+        return textfield
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubviews()
@@ -63,10 +77,11 @@ class ProfileHeaderView: UIView {
     }
     
     func addSubviews() {
-        addSubview(photoView)
-        addSubview(nameLabelView)
-        addSubview(statusLabelView)
-        addSubview(showStatusButton)
+        addSubview(avatarImageView)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+        addSubview(setStatusButton)
+        addSubview(statusTextField)
     }
     
     override func layoutSubviews() {
@@ -77,36 +92,41 @@ class ProfileHeaderView: UIView {
     func setupConstraints() {
         let safeArea = self.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            photoView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
-            photoView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
-            photoView.widthAnchor.constraint(equalToConstant: 100),
-            photoView.heightAnchor.constraint(equalTo: photoView.widthAnchor, multiplier: 1),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 120),
+            avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor, multiplier: 1),
             
-            nameLabelView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
-            nameLabelView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 27),
-            nameLabelView.heightAnchor.constraint(equalToConstant: 30),
+            fullNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0),
+            fullNameLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 27),
+            fullNameLabel.heightAnchor.constraint(equalToConstant: 30),
             
-            showStatusButton.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 16),
-            showStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            showStatusButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
-            showStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             
-            statusLabelView.leadingAnchor.constraint(equalTo: nameLabelView.leadingAnchor),
-            statusLabelView.bottomAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -34),
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -54),
+            
+            statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor) ,
+            statusTextField.trailingAnchor.constraint(equalTo: setStatusButton.trailingAnchor) ,
+            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 6) ,
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
         ])
     }
     
     func setupUI() {
-        photoView.layer.masksToBounds = true
-        photoView.layer.cornerRadius = photoView.frame.width / 2
+        avatarImageView.layer.masksToBounds = true
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
     }
     
     func addStatusButtonAction() {
-        showStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     @objc func buttonPressed() {
-        print("Text: " + (statusLabelView.text ?? "<empty>"))
+        statusLabel.text = statusTextField.text?.trimmingCharacters(in: [" "])
     }
 }
