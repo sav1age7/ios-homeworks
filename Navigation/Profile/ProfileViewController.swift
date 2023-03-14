@@ -29,12 +29,13 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Profile"
-        addSubviews()
+        setupUI()
         setupConstraints()
     }
     
-    func addSubviews() {
+    func setupUI() {
+        self.title = "Profile"
+        view.backgroundColor = .white
         view.addSubview(headerView)
         view.addSubview(someButton)
     }

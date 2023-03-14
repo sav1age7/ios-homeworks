@@ -53,7 +53,7 @@ class ProfileHeaderView: UIView {
     
     var statusTextField: UITextField = {
         let textfield = UITextField()
-        textfield.text = "Listening to music"
+        textfield.placeholder = "Listening to music"
         textfield.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textfield.textColor = .black
         textfield.backgroundColor = .white
