@@ -8,7 +8,18 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
+    private var postArr: [Post] = Post.make()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
+    private enum CellReuseID: String {
+        case postCell = "PostTabelViewCell_ReuseID"
+    }
+    
     let headerView: ProfileHeaderView = {
         let header = ProfileHeaderView()
         header.translatesAutoresizingMaskIntoConstraints = false
@@ -16,17 +27,6 @@ class ProfileViewController: UIViewController {
         return header
     }()
     
-    let someButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Some button", for: .normal)
-        button.tintColor = .white
-        button.backgroundColor = .blue
-        button.layer.borderColor = UIColor.black.cgColor
-        button.layer.borderWidth = 2
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -37,7 +37,8 @@ class ProfileViewController: UIViewController {
         self.title = "Profile"
         view.backgroundColor = .white
         view.addSubview(headerView)
-        view.addSubview(someButton)
+        view.addSubview(tableView)
+        setupTableView()
     }
       
     func setupConstraints() {
@@ -49,12 +50,38 @@ class ProfileViewController: UIViewController {
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0) ,
             headerView.heightAnchor.constraint(equalToConstant: 220),
             
-            someButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            someButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            someButton.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0),
-            someButton.heightAnchor.constraint(equalToConstant: 30)
+            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
         ])
+    }
+    
+    func setupTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 500
+
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: CellReuseID.postCell.rawValue)
+
+        tableView.dataSource = self
+        tableView.delegate = self
     }
 }
 
+extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        postArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.postCell.rawValue, for: indexPath) as? PostTableViewCell else {
+            fatalError("could not dequeueReusableCell")
+        }
+        
+        cell.configure(with: postArr[indexPath.row])
+        return cell
+    }
+}
 
+extension ProfileViewController: UITableViewDelegate {}

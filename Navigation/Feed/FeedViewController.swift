@@ -8,9 +8,6 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-    
-    let post = Post(title: "New Title")
-    
     let vStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -31,7 +28,7 @@ class FeedViewController: UIViewController {
     @objc
     private func tapOnTouchButton() {
         let nextController = PostViewController()
-        nextController.title = post.title
+        nextController.title = "New title"
         navigationController?.pushViewController(nextController, animated: true)
     }
     

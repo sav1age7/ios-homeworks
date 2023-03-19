@@ -12,6 +12,7 @@
 		AF2D26BC298E91DC0052D21A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2D26BB298E91DC0052D21A /* SceneDelegate.swift */; };
 		AF2D26C3298E91DD0052D21A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF2D26C2298E91DD0052D21A /* Assets.xcassets */; };
 		AF2D26C6298E91DD0052D21A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF2D26C4298E91DD0052D21A /* LaunchScreen.storyboard */; };
+		AF3BFC6E29C4232D0067DAD4 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3BFC6D29C4232D0067DAD4 /* PostTableViewCell.swift */; };
 		AF461338298EA37600C5A856 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF461337298EA37600C5A856 /* TabBarController.swift */; };
 		AF46133A298EA4C600C5A856 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF461339298EA4C600C5A856 /* FeedViewController.swift */; };
 		AF46133C298EA54600C5A856 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF46133B298EA54600C5A856 /* ProfileViewController.swift */; };
@@ -29,6 +30,7 @@
 		AF2D26C2298E91DD0052D21A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AF2D26C5298E91DD0052D21A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AF2D26C7298E91DD0052D21A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF3BFC6D29C4232D0067DAD4 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		AF461337298EA37600C5A856 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AF461339298EA4C600C5A856 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		AF46133B298EA54600C5A856 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -52,7 +54,8 @@
 		AF24377529A1225B0043EE07 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				AF24377629A122A60043EE07 /* ProfileHeaderView.swift */,
+				AF7EF0FF2994BEC000650E4B /* Models */,
+				AF3BFC7129C6FFAA0067DAD4 /* Views */,
 				AF6F59BE29AD05AF0006CB98 /* LogInViewController.swift */,
 				AF46133B298EA54600C5A856 /* ProfileViewController.swift */,
 			);
@@ -81,7 +84,6 @@
 				AF2D26B9298E91DC0052D21A /* AppDelegate.swift */,
 				AF2D26BB298E91DC0052D21A /* SceneDelegate.swift */,
 				AF46133D298EA56A00C5A856 /* Controllers */,
-				AF7EF0FF2994BEC000650E4B /* Models */,
 				AF2D26C2298E91DD0052D21A /* Assets.xcassets */,
 				AF24377529A1225B0043EE07 /* Profile */,
 				AF6F59BD29AB32AF0006CB98 /* Feed */,
@@ -89,6 +91,15 @@
 				AF2D26C7298E91DD0052D21A /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		AF3BFC7129C6FFAA0067DAD4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AF24377629A122A60043EE07 /* ProfileHeaderView.swift */,
+				AF3BFC6D29C4232D0067DAD4 /* PostTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		AF46133D298EA56A00C5A856 /* Controllers */ = {
@@ -192,6 +203,7 @@
 				AF461338298EA37600C5A856 /* TabBarController.swift in Sources */,
 				AF7EF0FE2994BEB700650E4B /* Post.swift in Sources */,
 				AF24377729A122A60043EE07 /* ProfileHeaderView.swift in Sources */,
+				AF3BFC6E29C4232D0067DAD4 /* PostTableViewCell.swift in Sources */,
 				AF2D26BA298E91DC0052D21A /* AppDelegate.swift in Sources */,
 				AF2D26BC298E91DC0052D21A /* SceneDelegate.swift in Sources */,
 				AF7EF10129955C3D00650E4B /* InfoViewController.swift in Sources */,
