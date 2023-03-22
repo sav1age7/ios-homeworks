@@ -17,15 +17,9 @@ class ProfileViewController: UIViewController {
     }()
     
     private enum CellReuseID: String {
+        case headerCell = "ProfileHeaderView_ReuseID"
         case postCell = "PostTabelViewCell_ReuseID"
     }
-    
-    let headerView: ProfileHeaderView = {
-        let header = ProfileHeaderView()
-        header.translatesAutoresizingMaskIntoConstraints = false
-        header.backgroundColor = .lightGray
-        return header
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +29,6 @@ class ProfileViewController: UIViewController {
     
     func setupUI() {
         self.title = "Profile"
-        view.backgroundColor = .white
-        view.addSubview(headerView)
         view.addSubview(tableView)
         setupTableView()
     }
@@ -45,12 +37,7 @@ class ProfileViewController: UIViewController {
         let safeArea = self.view.safeAreaLayoutGuide
 
         NSLayoutConstraint.activate([
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 0),
-            headerView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 0),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0) ,
-            headerView.heightAnchor.constraint(equalToConstant: 220),
-            
-            tableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: safeArea.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
@@ -61,6 +48,7 @@ class ProfileViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 500
 
+        tableView.register(ProfileHeaderView.self, forCellReuseIdentifier: CellReuseID.headerCell.rawValue)
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: CellReuseID.postCell.rawValue)
 
         tableView.dataSource = self
@@ -70,17 +58,23 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        postArr.count
+        postArr.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.postCell.rawValue, for: indexPath) as? PostTableViewCell else {
-            fatalError("could not dequeueReusableCell")
+        if indexPath.row == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.headerCell.rawValue, for: indexPath) as? ProfileHeaderView else {
+                fatalError("could not dequeueReusableCell \(CellReuseID.headerCell.rawValue)")
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.postCell.rawValue, for: indexPath) as? PostTableViewCell else {
+                fatalError("could not dequeueReusableCell \(CellReuseID.postCell.rawValue)")
+            }
+            cell.configure(with: postArr[indexPath.row - 1])
+            return cell
         }
-        
-        cell.configure(with: postArr[indexPath.row])
-        return cell
     }
 }
 
