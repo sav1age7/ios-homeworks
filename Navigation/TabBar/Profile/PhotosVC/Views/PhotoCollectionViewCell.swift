@@ -31,12 +31,11 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(imageNumber: Int) {
+        backgroundColor = UIColor(white: 0.7, alpha: 0.1)
         guard let image = UIImage(named: "\(imageNumber)") else {
             photoImageView.image = UIImage(systemName: "questionmark.circle")
             return
         }
-
-        backgroundColor = UIColor(white: 0.7, alpha: 0.1)
         photoImageView.image = image
     }
 }

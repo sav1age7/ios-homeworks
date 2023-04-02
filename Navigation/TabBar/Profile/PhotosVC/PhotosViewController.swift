@@ -8,39 +8,29 @@
 import UIKit
 
 class PhotosViewController: UIViewController {
-    
-    let photosCollectionView: UICollectionView = {
+    lazy private(set) var photosCollectionView: UICollectionView = {
         let viewLayout = UICollectionViewFlowLayout()
         viewLayout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero, collectionViewLayout: viewLayout)
+        collection.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+        viewLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         return collection
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
+        setupCollectionView()
     }
     
     func addSubviews() {
         view.addSubview(photosCollectionView)
-        setupPhotosCollectionView()
     }
     
-    func setupPhotosCollectionView() {
+    func setupCollectionView() {
         photosCollectionView.frame = view.safeAreaLayoutGuide.layoutFrame
         photosCollectionView.delegate = self
         photosCollectionView.dataSource = self
-        photosCollectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
-    }
-    
-    func setupConstraints() {
-        
-        NSLayoutConstraint.activate([
-            photosCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            photosCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            photosCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            photosCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
     }
 }
 
@@ -56,9 +46,22 @@ extension PhotosViewController: UICollectionViewDataSource {
         }
         cell.configure(imageNumber: indexPath.row + 1)
         return cell
-
     }
     
-    
+
 }
-extension PhotosViewController: UICollectionViewDelegate {}
+
+extension PhotosViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        8
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        8
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let widthAndHeight = (view.safeAreaLayoutGuide.layoutFrame.width - 8 * 4 ) / 3
+        return CGSize(width: widthAndHeight, height: widthAndHeight)
+    }
+}
