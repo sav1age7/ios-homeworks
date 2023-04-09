@@ -22,10 +22,35 @@ class ProfileViewController: UIViewController {
         case photosCell = "PhotosTableViewCell_ReuseID"
     }
     
+    let headerCell = ProfileHeaderView()
+    
+    lazy var avatar = headerCell.avatarImageView
+    
+    lazy var superviewWidth: CGFloat = view.frame.width
+    
+    let avatarBackgroundView: UIView = {
+        let backView = UIView()
+        backView.backgroundColor = .white
+        backView.alpha = 0
+        return backView
+    }()
+    
+    let xButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("ⓧ", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private var isAvatarFullscreen = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +61,7 @@ class ProfileViewController: UIViewController {
     func setupUI() {
         view.addSubview(tableView)
         setupTableView()
+        setupAvatarBackgroundView()
     }
     
     func setupConstraints() {
@@ -60,6 +86,58 @@ class ProfileViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+    func setupAnimation() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(headerCellAvatarTapped))
+        avatar.isUserInteractionEnabled = true
+        avatar.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    @objc func headerCellAvatarTapped() {
+#if DEBUG
+        print("avatar tapped")
+#endif
+        guard !isAvatarFullscreen else { return }
+        
+        isAvatarFullscreen.toggle()
+        
+        headerCell.avatarImageView.removeFromSuperview()
+        view.addSubview(avatar)
+        avatar.translatesAutoresizingMaskIntoConstraints = true
+        
+        UIView.animate(withDuration: 0.5) {
+            self.avatar.layer.frame = CGRect(x: self.view.center.x - self.superviewWidth / 2, y: self.view.center.y / 2, width: self.superviewWidth, height: self.superviewWidth)
+            self.avatarBackgroundView.alpha = 0.5
+        }
+    }
+    
+    func setupAvatarBackgroundView() {
+        avatarBackgroundView.frame = self.view.frame
+        
+        view.insertSubview(avatarBackgroundView, belowSubview: avatar)
+        avatarBackgroundView.addSubview(xButton)
+        
+        xButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        xButton.rightAnchor.constraint(equalTo: avatarBackgroundView.rightAnchor, constant: -20).isActive = true
+        
+        xButton.addTarget(self, action: #selector(xButtonTapped), for: .touchUpInside)
+    }
+    
+    @objc func xButtonTapped() {
+#if DEBUG
+        print("xButton tapped")
+#endif
+        avatar.removeFromSuperview()
+        headerCell.insertSubview(headerCell.avatarImageView, aboveSubview: headerCell)
+        
+        UIView.animate(withDuration: 0.5) {
+            self.avatar.layer.frame = CGRect(x: 16, y: 16, width: 120, height: 120)
+            self.avatar.layer.cornerRadius = 120 / 2
+            self.avatarBackgroundView.alpha = 0
+        }
+
+        isAvatarFullscreen.toggle()
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
@@ -71,10 +149,7 @@ extension ProfileViewController: UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.headerCell.rawValue, for: indexPath) as? ProfileHeaderView else {
-                fatalError("could not dequeueReusableCell \(CellReuseID.headerCell.rawValue)")
-            }
-            return cell
+            return headerCell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.photosCell.rawValue, for: indexPath) as? PhotosTableViewCell else {
                 fatalError("could not dequeueReusableCell \(CellReuseID.photosCell.rawValue)")
